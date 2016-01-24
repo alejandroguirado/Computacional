@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage{latexsym,graphicx,multicol,topcapt,amsmath,setspace,geometry,color,booktabs}
+
+\begin{document}
+
+
+\begin{titlepage}
+
+\begin{center}
+ \includegraphics[scale = 0.5]{logo}\\[0.5 cm]
+
+FACULTAD DE CIENCIAS EXACTAS Y NATURALES\\
+\vspace*{0.15in}
+DEPARTAMENTO DE FÍSICA \\
+\vspace*{0.6in}
+\begin{large}
+Primera práctica:\\
+\end{large}
+\vspace*{0.2in}
+\begin{Large}
+\textbf{Péndulo } \\
+\end{Large}
+\vspace*{0.3in}
+\begin{large}
+Primera práctica de la materia de Física Computacional I; traducción de las primeras 3 secciones del artículo de péndulo en Wikipedia\\
+\end{large}
+\vspace*{0.3in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+Fecha de entrega: \\
+24 de Enero del 2016 \\
+\end{large}
+\end{center}
+
+\end{titlepage}
+
+
+
+
+
+\newpage
+
+\section{Péndulo simple}
+Se le llama péndulo simple a una idealización del péndulo real en un sistema aisalado tomando en cuenta las siguientes suposiciones:
+\begin{enumerate}
+\item La cuerda o liston tiene una masa despreciable.
+\item Se considerá un punto de masa.
+\item El movimiento ocurre solo en dos direcciones. No se traza una elipse.
+\item EL movimiento no pierde energia por fricción ni por la resistencia del aire.
+\item El campo gravitacional es uníforme.
+\item El extremo opuesto a la masa siempre está fijo.
+
+\end{enumerate}
+Por último, la ecuación que representa el movimiento del péndulo simple es la siguiente ecuacion diferencial:
+
+\begin{equation}
+\frac{\partial^2 \theta}{dt^2}+\frac{g}{l}\sin\theta=0
+\end{equation}
+Donde g es la aceleración debido a la gravedad, l es la longitud del pendulo y $\theta$ es el desplazamiento angular.
+
+\section{Aproximación con ángulo pequeño}
+La ecuación diferencial dada anteriormente no es fácil de resolver, además no existe solución que spueda ser escrita en términos de las funciones elementales. Sin embargo, añadiendo una restricción al tamaño de amplitud en la oscilación, nos brinda una forma donde la solución puede ser facilmente obtenida. Se asume que el angulo es mucho menor a 1. Esto quiere decir que: $\theta \ll 1$. \\
+Después sustituyendo $\sin \theta $ en Ec.1 por $\theta$  usando un aproximación debido a un ángulo pequeño en el desplazamiento, es decir que: $\sin \theta \approx \sin \theta$.
+Tenemos la ecuación para el oscilador armónico. 
+
+\begin{equation}
+\frac{\partial^2 \theta}{dt^2}+\frac{g}{l}\theta=0
+\end{equation}
+El error debido a la aproximación es de orden $\theta^3$ (obtenido por la seria de Mclaurin para $\sin\theta$). \
+Dadas las condiciones iniciales $\theta(0)= \theta_0$ y $\frac{d\theta}{dt}(0)=0$. Por lo tanto, la solución se convierte en:
+
+\begin{equation}
+\theta(t)=\theta_0 \cos \left (\sqrt \frac{g}{l} \right)
+\end{equation}
+
+Cuando $\theta_0 \ll 1$.
+
+El movimiento es considerado movimiento armónicop simple donde $\theta_0$ es la semi amplitud de oscilacion (esto es, el máximo ángulo entre la cuerda del péndulo y la vertical). El periodo del movimiento, es el tiempo que tarda en una oscilacion completa y esta dada por: 
+
+\begin{equation}
+T_0=2\pi \sqrt \frac{l}{g}
+\end{equation}
+
+Cuando $\theta_0 \ll 1$. \\
+
+Es conocida como la ley del periodo Christian Huygen. Hay que destacar que debajo del pequeño ángulo de aproximación, el periodo es independiente de la amplitud $\theta_0$: esta propiedad de isocronismo fue descubierta por Galileo.
+ 
+\subsection{La regla del pulgar para el péndulo largo}
+
+Si $T_0=2\pi \sqrt \frac{l}{g}$ se puede expresar como l= $\frac{g}{\pi^2} \times \frac{T_0^2}{4}$.\\
+
+Si está en unidades del sistema internacional y asumiendo que la medición está tomando lugar en la superficie de la tierra entonces $g \approx 9.81 \frac{m}{s^2}$, y $\frac{g}{\pi^2} \approx 1$(0.994 es la aproximación en 3 decímales). Por lo tanto, una aproximación razonable para la longitud y el periodo es: \\
+$l \approx \frac{T_0^2}{4}$.\\
+$T_0 \approx 2\sqrt l$. \\
+Donde $T_0$ es el número de segundos entre dos latidos y l está en metros.
+
+\section{Amplitud arbtiraria del periodo}
+
+Para amplitudes por debajo del ángulo de aproximación, uno puede calcular el periodo exacto primeramente invirtiendo la ecuación para la velocidad angular obtenida con la ecuación 2.
+
+$$\frac{dt}{d \theta}=\sqrt \frac{l}{2g}\frac{1}{\sqrt \cos\theta-\cos\theta_0}
+$$
+
+Integrando para ciclo completo tenemos que:
+$$
+T=4\sqrt \frac{l}{2g} \int\limits_0^\theta  \frac{1}{\sqrt \cos\theta-\cos\theta_0} 
+$$
+Además esta integral puede ser reescrita en términos de integrales elípticas. Quedaría de la siguiente manera:
+
+
+\begin{equation}
+T=4\sqrt \frac{l}{g}F\left(\frac{\theta_0}{2}, \csc \frac{\theta_0}{2}\right)\csc\frac{\theta_0}{2}
+\end{equation}
+
+
+
+\begin{figure}[h!]
+\centering
+    \includegraphics[width=5cm]{pendulo1}
+    \caption{Desviación del periodo "real" del periodo del péndulo desde una aproximación con ángulo pequeño}
+\end{figure} 
+
+
+Definiendo la integral como una integral elíptica de primer orden y aplicando la sustitución de $\sin u=\frac{\sin\frac{\theta}{2}}{\frac{\theta_0}{2}}$ expresando $\theta$ en términos de u.
+
+Nos queda la siguiente ecuación:
+$$
+T=4\sqrt \frac{l}{g}K \left (\sin \left(\frac{\theta_0}{2})\right)}\right)
+ $$
+
+En comparación de la aproximación para la completa solución , se considera el periodo de la longitud del péndulo de un metro en tierra($g=9.80665\frac{m}{s^2}$). Con un ángulo inicial de 10 grados es aproximadamente 2.0102s y la aproximación lineal es 2.0064s. La diferencia entre estos dos valores es menor al 0.2$\%$, es mucho menor que la causa de la variacion de g en geografía. Desde aquí existen algunas maneras para proceder como calcular la integral elíptica:
+
+
+
+\subsection{Solución en series de Legendre para la integral elíptica}
+
+Dada la ecuación 3 la aproximación polinomica para la integral elíptica sería: 
+
+\begin{equation}
+K(k)= \frac {\pi}{2} \left(1+\left(\frac{1}{2} \right)^2 k^2 + \left(\frac{1\cdot 3}{2 \cdot 4}\right)k^4+ \ldots + \left [\frac{(2n-1)!!}{(2n)!!}\right]k^{2n}+ \cdots \right)
+\end{equation}
+
+Donde n!! denota el doble factorial. La solución exacta para el periodo del péndulo es:
+
+\begin{align*}
+T&=2\pi\sqrt{\frac{l}{g}}\Bigg(1+\left(\frac{1}{2}\right)^2\sin^2\left(\frac{\theta_0}{2}\right)+\left(\frac{1\cdot3}{2\cdot4}\right)^2\sin^4\left(\frac{\theta_0}{2}\right)+\left(\frac{1\cdot3\cdot5}{2\cdot4\cdot6}\right)^2\sin^6\left(\frac{\theta_0}{2}\right)+\cdots\Bigg) \\
+&=2\pi\sqrt{\frac{l}{g}}\cdot\sum_{n=0}^{\infty}\left[\left(\frac{(2n)!}{(2^n\cdot n!)^2}\right)^2\cdot\sin^{2n}\left(\frac{\theta_0}{2}\right)\right]
+\end{align*}
+\subsection{ Solución en series de potencia para una integral elíptica}
+
+Otra formulación en el caso mencionado anteriormente puede ser encontrada si se utiliza series de Maclaurin
+
+$$ \sin \frac{\theta_0}{2}=\frac{1}{2}\theta_0 - \frac{1}{48} \theta{^3}_0 + \frac{1}{3840}\theta^{5}_0- \frac{1}{645120}\theta^{7}_0 + \dots $$
+
+Con este resultado se puede aproximar el periodo en series de potencias.
+
+
+
+\subsection{Solución aritmética-geométrica para una integral elíptica}
+
+Dada la ecuación 3 y la solución aritmética- geométrica se puede obtener la solución de la integral cuyo resultado es:
+$ K(k)=\frac{\pi}{M(1-k,1+k)} $
+
+donde M(x,y) es la aritmética-geométrica en x y y. Este campo es alternativo y converge rapidámente a la fórmula del périodo.
+
+\begin{equation}
+T=\frac{2\pi}{M(1,\cos(\theta_{0}/2)} 
+\end{equation}
+
+
+
+
+
+
+\begin{thebibliography}{6}
+
+
+\bibitem{1}
+Wikipedia.
+\emph{Pendulo(mathematics)}.
+Recuperado el 23 de Enero de 2016 de https://en.wikipedia.org/wiki/Pendulum\_(mathematics)
+\end{thebibliography}
+
+
+
+
+
+
+
+\end{document}
