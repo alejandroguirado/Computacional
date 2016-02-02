@@ -1,0 +1,290 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{\#2 Programas}							% Título
+\author{Alejandro Guirado García}											% Autores
+\date{\today} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{} %Si quieres ponerle otro encabezado/pie de pagina%
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logo}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física Computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+ 
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large Integrante:} \large \\
+			\theauthor
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Programas}
+En esta actividad modificaremos algunos códigos para obtener otras incognitas. Se mostrarán los códigos inciales y los modificados. 
+\subsection{Código \# 1}
+
+En el código inicial se puede obtener la altura de un objeto que está cayendo de una torre de altura "h" (sin tomar en cuenta fuerzas de fricción), en un determinado tiempo.
+
+\begin{verbatim}
+h = float(input("Proporciona la altura de la torre: "))
+t = float(input("Ingresa el tiempo: "))
+s = 0.5*9.81*t**2
+print("La altura de la pelota es", h-s, "metros")
+\end{verbatim}
+
+En el cógido modificado, se puede obtener el tiempo en que tardaría en llegar al suelo, soltado desde una altura "h",sin tomar en cuenta fuerzas de fricción.
+
+\begin{verbatim}
+h = float(input("Proporciona la altura de la torre: "))
+t=sqrt(2*h/9.81)
+print("El tiempo que tarda la pelota en llegar al suelo es", t ,"segundos")
+\end{verbatim}
+
+
+\subsection{Código \# 2}
+
+Un satélite orbita la Tierra a una altura h, con un periodo T en segundos.
+
+Demuestre que la altitud h del satélite sobre la superficie de la Tierra esta dado por la expresión
+
+ 
+\begin{equation}
+(R + h)^3 = (GMT^2)/(4 pi^2)
+\end{equation}
+
+
+ 
+
+donde G = 6.67 x 10-11 $m^3$ kg$^{-1}$ s$^{-2}$ es la constante de Gravitación Universal de Newton, M = 5.97 $\times 10^{24}$ kg es la masa de la Tierra y R=6371 km es su radio.
+ESe pide un programa que pida al usuario ingresar el valor deseado de T y regrese la altura h correspondiente en metros.
+
+\subparagraph*{Demostración}
+\newcommand{\QED}{\hfill \textit{\textbf{Q.E.D.}}}
+Si suponemos que los satélites recorren orbitas circulares.
+
+\begin{equation}
+\overrightarrow{F}=m\dot{a}=m\frac{\overrightarrow{v^2}}{\overrightarrow{r}}    
+\end{equation}
+
+
+
+
+fuerza responsable del movimiento orbital sería la fuerza gravitatoria por parte de la tierra , por lo tanto tomando en cuenta solamente los módulos, nos queda:
+
+ \begin{equation}
+\frac{GmM}{r^2}=m\frac{v^2}{r}
+\end{equation}
+
+Donde m es la masa de la tierra y M la masa del satélite.Se sabe que "r" es la distancia entre entre el centro de la tierra y el satélite.
+
+Considerando el periodo del satélite:
+\begin{equation}
+ v=\frac{2\pi r}{T}
+\end{equation}
+
+
+
+Sustituyendo \label{4} en \label{3} y simplificando nos queda la siguiente expresión:
+
+\begin{equation}
+\frac{GM}{r^2}=\frac{4r\pi^2}{T}
+\end{equation}
+
+Por último, despejando a r, como r es la distancia del centro de la tierra al satélite se puede expresar r como (r'+h) donde r' sería el radio de la tierra y h la distancia de la superficie al satélite.
+\begin{equation}
+(R + h)^3 = (GMT^2)/(4 pi^2)
+\end{equation}
+Lo cual es lo que se quería demostrar.
+\subparagraph{Código}
+\begin{verbatim}
+from math import pi
+
+T = float(input("Proporciona el período de órbita en segundos: "))
+k = (6.67e-11*5.97e24)/(4*pi*pi)
+h = (k*T*T)**(1./3.)-6371000
+print("La altura del objeto con respecto a la superficie terrestre es",
+h, "metros")
+
+\end{verbatim}
+ 
+Después se nos pide, verificar la distancia del satélite a la tierra en base a su periodo, se mostrará en las siguientes 3 imagenes:
+
+\begin{figure}[H]
+   \centering
+    \includegraphics[height=5cm]{84600.png}
+    \caption{Con un periodo de 84600 segundos}
+\end{figure}
+
+
+\begin{figure}[H]
+   \centering
+    \includegraphics[height=5cm]{84600.png}
+    \caption{Con un periodo de 5400 segundos}
+\end{figure}
+
+
+\begin{figure}[H]
+   \centering
+    \includegraphics[height=5cm]{3600.png}
+    \caption{Con un periodo de 3600 segundos}
+\end{figure}
+\subsection{Código \# 3}
+
+Coordenadas polares. Un punto en el espacio en el sistema de coordenadas polares se describe por las cantidades (r, $\theta$).
+
+ 
+
+La relación entre coordenadas polares y el sistema de coordenadas cartesianos, esta dada por las ecuaciones:  x = r $\cos \theta$, y = $r \sin \theta$.
+
+ El siguiente programa para calcular las coordenadas cartesianas a partir de las coordenadas polares: 
+ 
+ \begin{verbatim}
+from math import sin,cos,pi
+r = float(input("Introduce r: "))
+d = float(input("Ingresa theta en grados: "))
+theta = d*pi/180
+x = r*cos(theta)
+y = r*sin(theta)
+print("x =",x," y =",y)
+\end{verbatim}
+
+ Se nos pide modificar el código para obtener coordenas esféricas a partír de rectangulares.
+ 
+ \begin{verbatim}
+from math import pi,atan,acos
+x = float(input("Introduce x: "))
+y = float(input("Introduce y: "))
+z = float(input("Introduce z: "))
+r = sqrt(x*x+y*y+z*z)
+theta = atan(r/z)
+phi = acos(z/(sqrt((x*x)+(y*y)+(z*z))))
+print("r =",r," theta =",theta," phi =",phi)
+\end{verbatim}
+
+Al dar los siguientes valores Introduce: x=10, y=15, z=20
+r= 26.92582403567252, theta= 0.9319311825594854, phi = 0.7335813236400831.
+
+\newpage
+\subsection{Código \# 4}
+
+El siguiente código nos permite ingresar un número, el cual si es par nos arrojará "even" y si es impar nos arrojará "odd".
+\begin{verbatim}
+n = int(input("Enter an integer: "))
+if n%2==0:
+     print("even")
+else:
+    print("odd")
+\end{verbatim}
+
+El siguiente código nos permite ingresar dos números y al final nos dice que dos números pusimos.
+
+\begin{verbatim}
+print("Enter two integers, one even, one odd.")
+m = int(input("Enter the first integer: "))
+n = int(input("Enter the second integer: "))
+while (m+n)%2==0:
+    print("One must be even and the other odd.")
+    m = int(input("Enter the first integer: "))
+    n = int(input("Enter the second integer: "))
+print("The numbers you chose are",m,"and",n)
+\end{verbatim}
+\newpage
+\subsection{Código \# 5}
+ Los Números de Fibonacci  es una sucesión de números enteros aparecen en toda la naturaleza.  
+
+El siguiente programa calcula la secuencia de Fibonacci, introduce la condición de control while 
+
+\begin{verbatim}
+f1,f2 = 1,1
+while f2<1000:
+     print(f2)
+      f1,f2 = f2,f1+f2
+      -----------------------------------
+       
+
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+
+\end{verbatim}
+Se busca que basados en está ídea se escriba un programa para los números del catalán, que son dados por la fórmula de recurrencia:  
+\begin{equation}
+C_0=1, C_{(n+1)} = \frac{2(2n+1)}{(n+2)}C_n
+\end{equation}
+\newpage
+Imprimiendo cualquier numero menor o igual a 1000000.
+
+\begin{verbatim}
+n,c = 2,6
+
+while c<100000:
+
+       print(c)
+ 
+             n,c = n+1,(((4*n)+2)/(n+2))*c
+   -------------------------------
+6
+12
+24
+72
+216
+648
+1944
+5832
+17496
+52488
+
+\end{verbatim}
+
+\end{document}
